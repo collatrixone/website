@@ -13,8 +13,14 @@
 
   // configurable app links
   document.querySelectorAll("[data-app]").forEach((a) => (a.href = cfg.appUrl || "#eligibility"));
-  document.querySelectorAll("[data-email]").forEach((a) => { a.href = "mailto:" + cfg.contactEmail; a.textContent = cfg.contactEmail; });
-  document.querySelectorAll("[data-phone]").forEach((a) => { a.href = "tel:" + (cfg.contactPhone || "").replace(/\s/g, ""); a.textContent = cfg.contactPhone; });
+  document.querySelectorAll("[data-email]").forEach((a) => {
+    const mail = (cfg.emails && cfg.emails[a.dataset.email]) || cfg.contactEmail;
+    a.href = "mailto:" + mail; a.textContent = mail;
+  });
+  document.querySelectorAll("[data-phone]").forEach((a) => {
+    if (!cfg.contactPhone) { (a.closest("p") || a).hidden = true; return; }
+    a.href = "tel:" + cfg.contactPhone.replace(/\s/g, ""); a.textContent = cfg.contactPhone;
+  });
 
   // scroll reveal
   const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))), { threshold: 0.12 });

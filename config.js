@@ -8,6 +8,11 @@ window.YANMORA_CONFIG = {
   contactEndpoint: "",   // e.g. "https://api.example.com/public/contact"
   appUrl: "#eligibility", // where "Apply" / "Login" CTAs go (customer dashboard URL)
   partnerEndpoint: "",   // public partner-enquiry route; falls back to email when empty
-  contactEmail: "support@yanmora.com",
-  contactPhone: "+91 00000 00000",
+  contactEmail: "info@yanmora.com", // default recipient for the contact and partner form fallbacks
+  emails: {
+    info: "info@yanmora.com",
+    product: "product@yanmora.com",
+    support: "support@yanmora.com",
+  },
+  contactPhone: "", // e.g. "+91 98765 43210"; the phone line stays hidden while empty
 };
